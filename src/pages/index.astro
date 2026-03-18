@@ -1,0 +1,154 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CapstoneCard from '../components/CapstoneCard.astro';
+import capstones from '../data/capstones.json';
+
+// Get unique courses for filtering
+const courses = [...new Set(capstones.map(c => c.course))];
+---
+
+<Layout>
+  <!-- Hero Section -->
+  <div class="banner">
+    <h1>CAPSTONE SHOWCASE</h1>
+    <p>Discover how CIIT's artists weaved their vision <br>
+    into reality from a living archive of student's capstones</p>
+    <div class="search-bar">
+      <span class="material-symbols-outlined">search</span>
+      <input type="text" id="searchInput" placeholder="Find inspiration from projects and authors">
+      <button id="searchBtn">Search</button>
+    </div>
+  </div>
+
+  <!-- Navigation Bar / Filter Controls -->
+  <div class="nav-bar-container">
+    <div class="nav-actions">
+      <!-- Filter Dropdown -->
+      <div class="dropdown">
+        <button class="action-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Filter <span class="material-symbols-outlined">filter_alt</span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#" data-filter="All">All Courses</a></li>
+          {courses.map(course => (
+            <li><a class="dropdown-item" href="#" data-filter={course}>{course}</a></li>
+          ))}
+        </ul>
+      </div>
+      
+      <!-- Sort Dropdown -->
+      <div class="dropdown">
+        <button class="action-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Sort <span class="material-symbols-outlined">sort</span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#" data-sort="Relevance">Relevance</a></li>
+          <li><a class="dropdown-item" href="#" data-sort="Latest">Latest</a></li>
+          <li><a class="dropdown-item" href="#" data-sort="Most Viewed">Most Viewed</a></li>
+          <li><a class="dropdown-item" href="#" data-sort="Highest Rated">Highest Rated</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Masonry Grid -->
+  <div class="masonry-grid" id="capstoneGrid">
+    {capstones.map(capstone => (
+      <CapstoneCard capstone={capstone} />
+    ))}
+  </div>
+
+  <script>
+    // Client-side filtering logic
+    document.addEventListener('DOMContentLoaded', () => {
+      const grid = document.getElementById('capstoneGrid');
+      const cards = grid.querySelectorAll('.masonry-item');
+      const searchInput = document.getElementById('searchInput');
+      const filterItems = document.querySelectorAll('.dropdown-item[data-filter]');
+      const sortItems = document.querySelectorAll('.dropdown-item[data-sort]');
+
+      // Filter Function
+      function filterCards(category) {
+        cards.forEach(card => {
+          const cardCategory = card.getAttribute('data-category');
+          if (category === 'All' || cardCategory === category) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      }
+
+      // Search Function
+      function searchCards(query) {
+        const lowerQuery = query.toLowerCase();
+        cards.forEach(card => {
+          const title = card.querySelector('h3').textContent.toLowerCase();
+          const author = card.querySelector('.author').textContent.toLowerCase();
+          if (title.includes(lowerQuery) || author.includes(lowerQuery)) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      }
+
+      // Sort Function
+      function sortCards(criteria) {
+        const cardsArray = Array.from(cards);
+        
+        // We need to sort ALL cards, not just visible ones, to maintain state correctly
+        // But for simplicity, let's just sort the visible ones and re-append them
+        
+        switch (criteria) {
+          case 'Latest':
+            cardsArray.sort((a, b) => {
+              const yearA = parseInt(a.querySelector('.year').textContent);
+              const yearB = parseInt(b.querySelector('.year').textContent);
+              return yearB - yearA;
+            });
+            break;
+          case 'Highest Rated':
+            // Simulate rating by sorting by title descending (A-Z reversed)
+            cardsArray.sort((a, b) => {
+              const titleA = a.querySelector('h3').textContent;
+              const titleB = b.querySelector('h3').textContent;
+              return titleB.localeCompare(titleA);
+            });
+            break;
+          case 'Most Viewed':
+            // Random shuffle for simulation
+            cardsArray.sort(() => Math.random() - 0.5);
+            break;
+          case 'Relevance':
+          default:
+            // Default order - do nothing or reset to original
+            // In a real app, we'd store original indices
+            break;
+        }
+        
+        // Re-append sorted cards
+        cardsArray.forEach(card => grid.appendChild(card));
+      }
+
+      // Event Listeners
+      filterItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+          e.preventDefault();
+          filterCards(e.target.getAttribute('data-filter'));
+        });
+      });
+
+      searchInput.addEventListener('input', (e) => {
+        searchCards(e.target.value);
+      });
+
+      sortItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+          e.preventDefault();
+          sortCards(e.target.getAttribute('data-sort'));
+        });
+      });
+    });
+  </script>
+</Layout>

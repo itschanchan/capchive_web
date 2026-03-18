@@ -1,0 +1,96 @@
+---
+const { capstone } = Astro.props;
+---
+
+<a href={`/capstone/${capstone.id}`} class="masonry-item" data-category={capstone.course}>
+  <div class="card-content">
+    <div class="card-image">
+      <img src={capstone.image} alt={capstone.title} />
+    </div>
+    <div class="card-details">
+      <h3>{capstone.title}</h3>
+      <p class="author">{capstone.authors}</p>
+      <div class="tags">
+        <span class="tag year">{capstone.year}</span>
+        <span class="tag course">{capstone.course}</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+<style>
+  .masonry-item {
+    display: block;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    color: inherit;
+    margin-bottom: 1rem;
+    break-inside: avoid;
+  }
+
+  .masonry-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  }
+
+  .card-content {
+    padding: 1rem;
+  }
+
+  .card-image {
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    background: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .card-details h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+    color: #2c3e50;
+  }
+
+  .author {
+    color: #6c757d;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .year {
+    background-color: var(--button-hover-bg-color, #e0e0e0);
+    color: var(--header-bg-color, #333);
+  }
+
+  .course {
+    background-color: var(--nav-btn-bg-color, #f0f0f0);
+    color: var(--header-bg-color, #333);
+  }
+</style>

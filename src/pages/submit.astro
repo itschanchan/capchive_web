@@ -1,0 +1,92 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+  <div class="submit-container">
+    <h1>How to Submit Your Capstone</h1>
+    
+    <p>To add your capstone project to the archive, please email the site maintainers with the following details and attached files.</p>
+    
+    <div class="contact-info">
+      <h2>Contact Maintainers</h2>
+      <ul>
+        <li>Virgil Quita: <a href="mailto:virgil.quita@ciit.edu.ph">virgil.quita@ciit.edu.ph</a></li>
+        <li>Sean Lacson: <a href="mailto:sean.lacson@ciit.edu.ph">sean.lacson@ciit.edu.ph</a></li>
+      </ul>
+    </div>
+    
+    <div class="email-template">
+      <h2>Sample Email Template</h2>
+      <pre>
+Subject: Capstone Submission - [Your Project Title]
+
+Dear Site Maintainers,
+
+I would like to submit my capstone project to the archive.
+
+Project Details:
+- Title: [Project Title]
+- Author(s): [Your Name/Team Members]
+- Year: [Year of Completion]
+- Course: [Your Course]
+- Description: [Brief description of your project]
+
+Attached Files:
+- Documentation: [PDF/DOC file]
+- Images: [Image files of your project/demo]
+
+Thank you for considering my submission.
+
+Best regards,
+[Your Name]
+      </pre>
+    </div>
+    
+    <div class="requirements">
+      <h2>Submission Requirements</h2>
+      <ul>
+        <li>Project Title</li>
+        <li>Author(s) Name</li>
+        <li>Year of Capstone</li>
+        <li>Course</li>
+        <li>Brief Description</li>
+        <li>Documentation (PDF/DOC)</li>
+        <li>Images/Demo Videos (Optional but recommended)</li>
+      </ul>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .submit-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  h1 {
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-info, .email-template, .requirements {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+  }
+
+  .email-template pre {
+    background: #fff;
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    font-family: monospace;
+    white-space: pre-wrap;
+  }
+
+  ul {
+    line-height: 1.8;
+  }
+</style>

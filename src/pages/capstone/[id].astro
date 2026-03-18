@@ -1,0 +1,124 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import capstones from '../../data/capstones.json';
+
+export async function getStaticPaths() {
+  return capstones.map(capstone => ({
+    params: { id: capstone.id },
+    props: { capstone },
+  }));
+}
+
+const { capstone } = Astro.props;
+---
+
+<Layout>
+  <div class="detail-container">
+    <a href="/" class="back-link">&larr; Back to Archive</a>
+    
+    <div class="capstone-detail">
+      <div class="detail-image">
+        <img src={capstone.image} alt={capstone.title} />
+      </div>
+      
+      <div class="detail-content">
+        <h1>{capstone.title}</h1>
+        <p class="meta">By {capstone.authors} | {capstone.year} | {capstone.course}</p>
+        
+        <div class="description">
+          <h2>Description</h2>
+          <p>{capstone.description}</p>
+        </div>
+        
+        <div class="documentation">
+          <h2>Documentation</h2>
+          <a href={capstone.documentation} target="_blank" class="btn btn-primary">View Documentation</a>
+        </div>
+        
+        <div class="images">
+          <h2>Images</h2>
+          <div class="image-gallery">
+            {capstone.images.map(img => (
+              <img src={img} alt={capstone.title} class="gallery-img" />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .detail-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 2rem;
+    color: var(--header-bg-color, #333);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .back-link:hover {
+    text-decoration: underline;
+  }
+
+  .capstone-detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+
+  @media (max-width: 768px) {
+    .capstone-detail {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .detail-image img {
+    width: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+
+  .detail-content h1 {
+    margin-top: 0;
+    color: #2c3e50;
+  }
+
+  .meta {
+    color: #6c757d;
+    margin-bottom: 1.5rem;
+  }
+
+  .description, .documentation, .images {
+    margin-bottom: 2rem;
+  }
+
+  .description h2, .documentation h2, .images h2 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: #444;
+  }
+
+  .image-gallery {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .gallery-img {
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+</style>

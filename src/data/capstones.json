@@ -1,0 +1,68 @@
+[
+  {
+    "id": "project-alpha",
+    "image": "/ciit-logo.png",
+    "title": "Project Alpha",
+    "authors": "John Doe",
+    "year": "2023",
+    "course": "Computer Science",
+    "description": "Project Alpha is a comprehensive software solution designed to streamline workflow processes.",
+    "documentation": "/docs/project-alpha.pdf",
+    "images": ["/ciit-logo.png"]
+  },
+  {
+    "id": "creative-vision",
+    "image": "/ciit-logo.png",
+    "title": "Creative Vision",
+    "authors": "Jane Smith",
+    "year": "2022",
+    "course": "Multimedia Arts",
+    "description": "A multimedia project exploring visual storytelling through digital art.",
+    "documentation": "/docs/creative-vision.pdf",
+    "images": ["/ciit-logo.png"]
+  },
+  {
+    "id": "tech-solutions",
+    "image": "/ciit-logo.png",
+    "title": "Tech Solutions",
+    "authors": "Mike Ross",
+    "year": "2024",
+    "course": "Information Systems",
+    "description": "An information system designed to optimize data management for small businesses.",
+    "documentation": "/docs/tech-solutions.pdf",
+    "images": ["/ciit-logo.png"]
+  },
+  {
+    "id": "game-on",
+    "image": "/ciit-logo.png",
+    "title": "Game On",
+    "authors": "Sarah Lee",
+    "year": "2023",
+    "course": "Game Development",
+    "description": "A 2D platformer game built with Unity, featuring unique mechanics and art style.",
+    "documentation": "/docs/game-on.pdf",
+    "images": ["/ciit-logo.png"]
+  },
+  {
+    "id": "biz-plan",
+    "image": "/ciit-logo.png",
+    "title": "Biz Plan",
+    "authors": "Tom Ford",
+    "year": "2022",
+    "course": "Entrepreneurship",
+    "description": "A comprehensive business plan for a startup focusing on sustainable technology.",
+    "documentation": "/docs/biz-plan.pdf",
+    "images": ["/ciit-logo.png"]
+  },
+  {
+    "id": "innovate",
+    "image": "/ciit-logo.png",
+    "title": "Innovate",
+    "authors": "Emily Blunt",
+    "year": "2024",
+    "course": "Computer Science",
+    "description": "An innovative application leveraging AI for predictive analysis in healthcare.",
+    "documentation": "/docs/innovate.pdf",
+    "images": ["/ciit-logo.png"]
+  }
+]

@@ -1,0 +1,60 @@
+.nav-bar-container {
+    background-color: white;
+    border-radius: 15px;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: -2.5rem auto 1rem;
+    width: 95%;
+    max-width: 1200px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    position: relative;
+    z-index: 10;
+}
+
+.nav-pills {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.pill {
+    border: none;
+    background: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #555;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.pill:hover, .pill.active {
+    background-color: var(--nav-btn-bg-color);
+    color: var(--header-bg-color);
+    font-weight: 600;
+}
+
+.nav-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.action-btn {
+    background: none;
+    border: 1px solid #ddd;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #333;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.8s ease, border-color 0.8s ease;
+}
+
+.action-btn:hover {
+    background-color: var(--white-bg-color);
+    border-color: #dee2e6;
+}
