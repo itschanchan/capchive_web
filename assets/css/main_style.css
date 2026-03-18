@@ -8,7 +8,7 @@ body {
 
 .banner {
     /* Apply a dark overlay and a background image */
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../ciit_banner.svg');
+    background: linear-gradient(rgba(0, 0, 0, 0.712), rgba(0, 0, 0, 0.616)), url('../ciit_banner.svg');
     background-size: cover;
     background-position: center;
     padding: 5rem 2rem;
@@ -55,3 +55,4 @@ body {
 .search-bar button:hover {
     background-color: var(--button-hover-bg-color);
 }
+

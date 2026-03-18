@@ -47,27 +47,6 @@
     <!-- SCRIPTS -->
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="js/loaders.js"></script>
-    
-    <!-- MAGIC BENTO -->
-    <script type="module">
-        import MagicBento from './js/MagicBento.js';
-
-        const mainContent = document.querySelector('.main-content');
-        
-        new MagicBento(mainContent, {
-            textAutoHide: true,
-            enableStars: false,
-            enableSpotlight: false,
-            enableBorderGlow: true,
-            enableTilt: false,
-            enableMagnetism: false,
-            clickEffect: true,
-            spotlightRadius: 50,
-            particleCount: 12,
-            glowColor: '0, 54, 77',
-            disableAnimations: false
-        });
-    </script>
+    <script type="module" src="js/loaders.js"></script>
 </body>
 </html>

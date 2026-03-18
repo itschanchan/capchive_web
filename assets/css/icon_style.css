@@ -1,9 +1,7 @@
-.search-bar 
-.material-symbols-outlined {
+.search-bar .material-symbols-outlined {
     color: #555;
 }
 
-.btn-about 
-.material-symbols-outlined {
+.btn-about .material-symbols-outlined {
     font-size: 1.1rem;
 }

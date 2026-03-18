@@ -1,54 +1,16 @@
-// Data Configuration
-const cardData = [
-  {
-    color: '#ffffff',
-    title: 'Analytics',
-    description: 'Track user behavior',
-    label: 'Insights'
-  },
-  {
-    color: '#ffffff',
-    title: 'Dashboard',
-    description: 'Centralized data view',
-    label: 'Overview'
-  },
-  {
-    color: '#ffffff',
-    title: 'Collaboration',
-    description: 'Work together seamlessly',
-    label: 'Teamwork'
-  },
-  {
-    color: '#ffffff',
-    title: 'Automation',
-    description: 'Streamline workflows',
-    label: 'Efficiency'
-  },
-  {
-    color: '#ffffff',
-    title: 'Integration',
-    description: 'Connect favorite tools',
-    label: 'Connectivity'
-  },
-  {
-    color: '#ffffff',
-    title: 'Security',
-    description: 'Enterprise-grade protection',
-    label: 'Protection'
-  }
-];
-
 export default class MagicBento {
     constructor(container, config = {}) {
         this.container = typeof container === 'string' ? document.querySelector(container) : container;
+        this.allCardData = [];
         
         // Default Configuration
+        this.currentData = []; // Store currently displayed data for sorting
         this.config = {
             textAutoHide: true,
             enableStars: false,
             enableSpotlight: false,
             enableBorderGlow: false,
-            enableTilt: false,
+            enableTilt: true,
             enableMagnetism: false,
             clickEffect: true,
             spotlightRadius: 300,
@@ -57,47 +19,69 @@ export default class MagicBento {
             disableAnimations: true,
             ...config
         };
-
-        this.init();
     }
 
-    init() {
+    async init() {
         if (!this.container) {
             console.error('MagicBento: Container not found');
             return;
         }
-        this.render();
+        await this.fetchData();
+        this.render(this.allCardData);
         this.attachEvents();
     }
 
-    render() {
-        const { textAutoHide, enableBorderGlow, glowColor } = this.config;
+    async fetchData() {
+        try {
+            const response = await fetch('./js/cardData.json');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            this.allCardData = await response.json();
+            this.currentData = [...this.allCardData]; // Initialize currentData
+        } catch (error) {
+            console.error("Could not fetch card data:", error);
+        }
+    }
+
+    render(cardsToRender) {
+        this.container.innerHTML = ''; // Clear previous content
+        const { enableBorderGlow, glowColor } = this.config;
         
         const grid = document.createElement('div');
         grid.className = 'card-grid bento-section';
 
-        cardData.forEach((card) => {
+        if (!cardsToRender || cardsToRender.length === 0) {
+            grid.innerHTML = `<p style="color: #555; text-align: center; grid-column: 1 / -1; padding: 2rem 0;">No projects found for this category.</p>`;
+            this.container.appendChild(grid);
+            return;
+        }
+
+        cardsToRender.forEach((card) => {
             const cardEl = document.createElement('div');
             
             // Build class list
             let classes = 'magic-bento-card';
-            if (textAutoHide) classes += ' magic-bento-card--text-autohide';
             if (enableBorderGlow) classes += ' magic-bento-card--border-glow';
             
             cardEl.className = classes;
             
             // Styles
-            cardEl.style.backgroundColor = card.color;
+            cardEl.style.backgroundColor = '#ffffff';
             cardEl.style.setProperty('--glow-color', glowColor);
 
             // Inner HTML
             cardEl.innerHTML = `
-                <div class="magic-bento-card__header">
-                    <div class="magic-bento-card__label">${card.label}</div>
+                <div style="flex: 1; overflow: hidden; border-radius: 8px; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; background: #f8f9fa;">
+                    <img src="${card.image}" alt="${card.title}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
                 </div>
-                <div class="magic-bento-card__content">
-                    <h2 class="magic-bento-card__title">${card.title}</h2>
-                    <p class="magic-bento-card__description">${card.description}</p>
+                <div style="flex-shrink: 0;">
+                    <div style="font-weight: bold; font-size: 1.1rem; margin-bottom: 4px; color: #2c3e50;">${card.title}</div>
+                    <small style="display: block; color: #6c757d; margin-bottom: 10px;">${card.authors}</small>
+                    <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                        <span style="background-color: var(--button-hover-bg-color); color: var(--header-bg-color); padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;">${card.year}</span>
+                        <span style="background-color: var(--nav-btn-bg-color); color: var(--header-bg-color); padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;">${card.course}</span>
+                    </div>
                 </div>
             `;
 
@@ -164,6 +148,55 @@ export default class MagicBento {
                 onComplete: () => ripple.remove()
             }
         );
+    }
+
+    filter(category) {
+        const filteredData = category === 'All'
+            ? this.allCardData
+            : this.allCardData.filter(card => card.course === category);
+        
+        this.render(filteredData);
+        this.attachEvents();
+    }
+    
+    sort(criteria) {
+        // If we haven't filtered yet, use all data, otherwise use the current subset
+        // For simplicity, we'll sort whatever is 'currentData' or 'allCardData'
+        // Note: Ideally, 'filter' should update 'currentData'. Let's fix filter first.
+        
+        let dataToSort = [...this.currentData]; 
+
+        switch (criteria) {
+            case 'Relevance':
+                // Default order from JSON
+                // To restore default relative to current filter, we might need original indices, 
+                // but here we'll just reset to allCardData if no filter is active, or just shuffle/reset.
+                // For this implementation, let's treat "Relevance" as "Default ID order".
+                // Since we don't track IDs, we'll just use the text comparison or no-op.
+                break;
+            case 'Latest':
+                dataToSort.sort((a, b) => b.year - a.year);
+                break;
+            case 'Most Viewed':
+                // Simulation: Random sort or by title length for demo
+                dataToSort.sort(() => Math.random() - 0.5); 
+                break;
+            case 'Highest Rated':
+                // Simulation: Reverse alphabetical by title for demo
+                dataToSort.sort((a, b) => b.title.localeCompare(a.title));
+                break;
+        }
+        this.render(dataToSort);
+        this.attachEvents();
+    }
+
+    filter(category) {
+        this.currentData = category === 'All'
+            ? [...this.allCardData]
+            : this.allCardData.filter(card => card.course === category);
+        
+        this.render(this.currentData);
+        this.attachEvents();
     }
 
     // Placeholder handlers for features if enabled in future
