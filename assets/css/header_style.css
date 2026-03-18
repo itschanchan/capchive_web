@@ -1,0 +1,67 @@
+.main-header {
+    background-color: var(--header-bg-color);
+    padding: 1rem 2rem;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-sizing: border-box;
+    font-weight: bold;
+}
+
+.header-logo {
+    height: 40px; /* Adjust as needed */
+}
+
+.header-nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.header-nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.2s;
+}
+
+.header-nav a:not(.btn-about):hover {
+    color: var(--header-hover-bg-color);
+}
+
+.header-nav button {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    font-family: inherit;
+    cursor: pointer;
+    padding: 0;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+
+.header-nav button:hover {
+    color: var(--header-hover-bg-color);
+}
+
+.header-nav a.btn-about {
+    background-color: var(--button-bg-color);
+    color: var(--header-bg-color); /* Using a variable for high contrast text */
+    padding: 0.5rem 1.5rem;
+    border-radius: 5px;
+    transition: background-color 0.2s ease-in-out;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.header-nav a.btn-about:hover {
+    background-color: var(--button-hover-bg-color);
+}

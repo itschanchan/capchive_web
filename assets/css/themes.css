@@ -1,0 +1,10 @@
+/* GLOBAL THEME COLORS */
+
+:root {
+  --white-bg-color: #ffffff;
+  --header-bg-color: #00364d;
+  --button-bg-color: #ebe73a;
+  --header-hover-bg-color: #ebe73a;
+  --button-hover-bg-color: #43c7f4;
+  --nav-btn-bg-color: #90a6af;
+}
