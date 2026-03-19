@@ -14,18 +14,69 @@
     z-index: var(--z-index-3);
     box-sizing: border-box;
     font-weight: var(--font-weight-7);
+    position: relative;
 }
 
 .header-logo {
     height: var(--header-logo-height);
 }
 
-.header-nav {
+/* Header Right Container */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: var(--size-3);
+}
+
+/* Hamburger Menu Button */
+.hamburger-menu {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--gray-0);
+    cursor: pointer;
+    padding: var(--size-1);
+    margin-left: auto;
+    /*margin-right: var(--size-2);*/
+}
+
+.hamburger-menu .material-symbols-outlined {
+    font-size: var(--font-size-5);
+    color: var(--gray-0);
+}
+
+.hamburger-menu:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-1);
+}
+
+/* Desktop Navigation */
+.header-nav.desktop-nav {
     display: flex;
     align-items: center;
     gap: var(--size-7);
 }
 
+/* Mobile Navigation */
+.header-nav.mobile-nav {
+    display: none !important;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--header-bg-color);
+    padding: var(--size-3);
+    flex-direction: column;
+    gap: var(--size-2);
+    box-shadow: var(--shadow-2);
+    z-index: var(--z-index-3);
+}
+
+.header-nav.mobile-nav.is-open {
+    display: flex !important;
+}
+
+/* Navigation Links Styling */
 .header-nav a {
     color: var(--gray-0);
     text-decoration: none;
@@ -66,4 +117,52 @@
 
 .header-nav a.btn-about:hover {
     background-color: var(--button-hover-bg-color);
+}
+
+/* Mobile Specific Styles */
+.mobile-nav a {
+    display: block;
+    padding: var(--size-2) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-nav a:last-child {
+    border-bottom: none;
+}
+
+.mobile-nav a.btn-about {
+    background-color: var(--button-bg-color);
+    color: var(--header-bg-color);
+    padding: var(--size-2) var(--size-3);
+    border-radius: var(--radius-2);
+    border: none;
+    margin-top: var(--size-2);
+    text-align: center;
+    justify-content: center;
+}
+
+/* Desktop: hide mobile nav completely */
+@media (min-width: 577px) {
+    .header-nav.mobile-nav {
+        display: none !important;
+    }
+}
+
+/* Mobile Breakpoint */
+@media (max-width: 576px) {
+    .hamburger-menu {
+        display: block;
+    }
+
+    .header-right .desktop-nav {
+        display: none;
+    }
+
+    .header-right {
+        justify-content: flex-end;
+    }
+
+    .main-header {
+        justify-content: space-between;
+    }
 }

@@ -1,0 +1,20 @@
+@font-face {
+    font-family: "Lorcan Mist";
+    src:
+        local("Lorcan Mist Regular"),
+        local("LorcanMist-Regular"),
+        url("/fonts/LorcanMist-Regular.woff2") format("woff2"),
+        url("/fonts/LorcanMist-Regular.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    --white-bg-color: #ffffff;
+    --header-bg-color: #00364d;
+    --button-bg-color: #ebe73a;
+    --header-hover-bg-color: #ebe73a;
+    --button-hover-bg-color: #43c7f4;
+    --nav-btn-bg-color: #90a6af;
+}
