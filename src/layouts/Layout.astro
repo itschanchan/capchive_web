@@ -1,25 +1,23 @@
 ---
-import Header from '../components/Header.astro';
+import Header from "../components/Header.astro";
 ---
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" href="/ciit_favicon.png" />
-    <meta name="generator" content={Astro.generator} />
-    <title>CIIT | Capstone Archive</title>
-    
-    <!-- Global Styles -->
-    <link rel="stylesheet" href="/src/styles/main_style.css">
-    <link rel="stylesheet" href="/src/styles/nav_style.css">
-  </head>
-  <body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" href="/ciit_favicon.png" />
+        <meta name="generator" content={Astro.generator} />
+        <title>CapChive</title>
+
+        <!-- Global Styles -->
+        <link rel="stylesheet" href="https://unpkg.com/open-props">
+        <link rel="stylesheet" href="/src/styles/main_style.css" />
+        <link rel="stylesheet" href="/src/styles/nav_style.css" />
+    </head>
+    <body>
     <Header />
     <slot />
-    
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
 </html>

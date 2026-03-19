@@ -1,19 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Racing+Sans+One&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Racing+Sans+One&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 
 body {
     margin: 0;
-    background-color: #ffffff;
-    font-family: 'Roboto', sans-serif;
+    background-color: var(--gray-0);
+    font-family: var(--font-sans);
 }
 
 .banner {
     /* Apply a dark overlay and a background image */
-    background: linear-gradient(rgba(0, 0, 0, 0.712), rgba(0, 0, 0, 0.616)), url('/ciit_banner.svg');
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.712), rgba(0, 0, 0, 0.616)),
+        url("/ciit_banner.svg");
     background-size: cover;
     background-position: center;
-    padding: 5rem 2rem;
-    height: 450px;
-    color: white;
+    padding: var(--size-10) var(--size-5);
+    height: var(--size-fluid-4);
+    color: var(--gray-0);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -24,8 +26,8 @@ body {
 /* Masonry Layout */
 .masonry-grid {
     column-count: 3;
-    column-gap: 1.5rem;
-    padding: 2rem;
+    column-gap: var(--size-5);
+    padding: var(--size-5);
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -43,37 +45,114 @@ body {
 }
 
 .search-bar {
-    margin-top: 1.5rem;
+    margin-top: var(--size-4);
     display: flex;
     background-color: var(--white-bg-color);
-    border-radius: 5px;
+    border-radius: var(--radius-2);
     align-items: center;
-    padding-left: 1rem;
+    padding: var(--size-1) var(--size-3);
+    gap: var(--size-1);
 }
 
 .search-bar input[type="text"] {
     width: 450px;
-    padding: 0.8rem;
+    flex: 1;
+    padding: var(--size-2);
     border: none;
     border-radius: 0;
-    font-size: 1rem;
+    font-size: var(--font-size-1);
     background: transparent;
-    color: #333;
+    color: var(--gray-8);
     outline: none;
 }
 
-.search-bar button {
-    padding: 0.8rem 1.5rem;
-    border: none;
-    background-color: var(--button-bg-color);
-    color: var(--header-bg-color);
-    border-radius: 0 5px 5px 0;
+/* Ensure max-width for larger screens */
+@media (min-width: 1400px) {
+    .search-bar input[type="text"] {
+        max-width: var(--size-content-1);
+    }
+}
+
+/* Dropdown buttons styling */
+.dropdown-toggle {
+    padding: var(--size-1) var(--size-3);
+    border: 1px solid var(--gray-3);
+    background-color: transparent;
+    color: var(--gray-8);
     cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.2s;
+    font-size: var(--font-size-1);
+    transition:
+        background-color var(--ease-3),
+        border-color var(--ease-3);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--size-1);
+    border-radius: var(--radius-2);
 }
 
-.search-bar button:hover {
-    background-color: var(--button-hover-bg-color);
+.dropdown-toggle:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-color: var(--gray-4);
 }
 
+/* Filter/Sort bar (right-aligned row below search) */
+.filter-sort-bar {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--size-1);
+    margin-top: var(--size-3);
+}
+
+/* Dropdown menu alignment - always align to the left */
+.dropdown-menu {
+    top: calc(100% + var(--size-1));
+    left: 0;
+    right: auto;
+}
+
+/* HTML/Body overflow control for mobile */
+html {
+    overflow-x: hidden;
+}
+
+body {
+    min-width: 100vw;
+    overflow-x: hidden;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 576px) {
+    /* Search bar full width, wrap on mobile */
+    .search-bar {
+        width: calc(100% - var(--size-3));
+        padding: var(--size-1);
+    }
+
+    .search-bar input[type="text"] {
+        width: 100%;
+        min-width: 0;
+    }
+
+    /* Filter/Sort bar adapts for mobile */
+    .filter-sort-bar {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        width: calc(100% - var(--size-3));
+    }
+
+    .filter-sort-bar .dropdown {
+        width: 48%;
+    }
+
+    .filter-sort-bar .dropdown-toggle {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Banner adjustments for mobile */
+    .banner {
+        height: auto;
+        min-height: var(--size-fluid-3);
+        padding: var(--size-7) var(--size-3);
+    }
+}

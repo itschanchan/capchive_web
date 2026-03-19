@@ -1,34 +1,37 @@
+:root {
+    --header-logo-height: 52px;
+}
+
 .main-header {
+    min-height: var(--size-9);
     background-color: var(--header-bg-color);
-    padding: 1rem 2rem;
-    color: white;
+    padding: 0 var(--size-3) 0 var(--size-1);
+    color: var(--gray-0);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
-    z-index: 1000;
+    z-index: var(--z-index-3);
     box-sizing: border-box;
-    font-weight: bold;
+    font-weight: var(--font-weight-7);
 }
 
 .header-logo {
-    height: 40px; /* Adjust as needed */
+    height: var(--header-logo-height);
 }
 
 .header-nav {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: var(--size-7);
 }
 
 .header-nav a {
-    color: white;
+    color: var(--gray-0);
     text-decoration: none;
-    font-size: 1rem;
-    transition: color 0.2s;
+    font-size: var(--font-size-1);
+    transition: color var(--ease-3);
+    border-radius: var(--radius-3);
 }
 
 .header-nav a:not(.btn-about):hover {
@@ -38,13 +41,13 @@
 .header-nav button {
     background: transparent;
     border: none;
-    color: white;
-    font-size: 1rem;
+    color: var(--gray-0);
+    font-size: var(--font-size-1);
     font-family: inherit;
     cursor: pointer;
     padding: 0;
-    font-weight: bold;
-    transition: color 0.2s;
+    font-weight: var(--font-weight-7);
+    transition: color var(--ease-3);
 }
 
 .header-nav button:hover {
@@ -52,14 +55,13 @@
 }
 
 .header-nav a.btn-about {
+    padding: var(--size-2) var(--size-4);
     background-color: var(--button-bg-color);
-    color: var(--header-bg-color); /* Using a variable for high contrast text */
-    padding: 0.5rem 1.5rem;
-    border-radius: 5px;
-    transition: background-color 0.2s ease-in-out;
+    color: var(--header-bg-color);
+    transition: background-color var(--ease-3);
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: var(--size-1);
 }
 
 .header-nav a.btn-about:hover {
