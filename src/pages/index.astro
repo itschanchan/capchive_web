@@ -1,103 +1,133 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import CapstoneCard from '../components/CapstoneCard.astro';
-import capstones from '../data/capstones.json';
+import Layout from "../layouts/Layout.astro";
+import CapstoneCard from "../components/CapstoneCard.astro";
+import capstones from "../data/capstones.json";
 
 // Get unique courses for filtering
-const courses = [...new Set(capstones.map(c => c.course))];
+const courses = [...new Set(capstones.map((c) => c.course))];
 ---
 
 <Layout>
   <!-- Hero Section -->
   <div class="banner">
     <h1>CAPSTONE SHOWCASE</h1>
-    <p>Discover how CIIT's artists weaved their vision <br>
-    into reality from a living archive of student's capstones</p>
-    <div class="search-bar">
-      <span class="material-symbols-outlined">search</span>
-      <input type="text" id="searchInput" placeholder="Find inspiration from projects and authors">
-    </div>
-    
-    <div class="filter-sort-bar">
-      <!-- Filter Dropdown -->
-      <div class="dropdown">
-        <button class="dropdown-toggle" type="button">
-          Filter <span class="material-symbols-outlined">filter_alt</span>
-        </button>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#" data-filter="All">All Courses</a></li>
-          {courses.map(course => (
-            <li><a class="dropdown-item" href="#" data-filter={course}>{course}</a></li>
-          ))}
-        </ul>
+    <p>
+      Discover how CIIT's artists weaved their vision <br />
+      into reality from a living archive of student's capstones
+    </p>
+    <div class="search-bar-container">
+      <div class="search-bar">
+        <span class="material-symbols-outlined">search</span>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Find inspiration from projects and authors"
+        />
       </div>
-      
-      <!-- Sort Dropdown -->
-      <div class="dropdown">
-        <button class="dropdown-toggle" type="button">
-          Sort <span class="material-symbols-outlined">sort</span>
-        </button>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#" data-sort="Relevance">Relevance</a></li>
-          <li><a class="dropdown-item" href="#" data-sort="Latest">Latest</a></li>
-          <li><a class="dropdown-item" href="#" data-sort="Most Viewed">Most Viewed</a></li>
-          <li><a class="dropdown-item" href="#" data-sort="Highest Rated">Highest Rated</a></li>
-        </ul>
+      <div class="filter-sort-bar">
+        <!-- Filter Dropdown -->
+        <div class="dropdown">
+          <button class="dropdown-toggle" type="button">
+            Filter <span class="material-symbols-outlined">filter_alt</span>
+          </button>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" href="#" data-filter="All">All Courses</a
+              >
+            </li>
+            {
+              courses.map((course) => (
+                <li>
+                  <a class="dropdown-item" href="#" data-filter={course}>
+                    {course}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <!-- Sort Dropdown -->
+        <div class="dropdown">
+          <button class="dropdown-toggle" type="button">
+            Sort <span class="material-symbols-outlined">sort</span>
+          </button>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" href="#" data-sort="Relevance"
+                >Relevance</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="#" data-sort="Latest">Latest</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#" data-sort="Most Viewed"
+                >Most Viewed</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="#" data-sort="Highest Rated"
+                >Highest Rated</a
+              >
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- Masonry Grid -->
   <div class="masonry-grid" id="capstoneGrid">
-    {capstones.map(capstone => (
-      <CapstoneCard capstone={capstone} />
-    ))}
+    {capstones.map((capstone) => <CapstoneCard capstone={capstone} />)}
   </div>
 
   <script>
     // Client-side filtering logic
-    document.addEventListener('DOMContentLoaded', () => {
-      const grid = document.getElementById('capstoneGrid');
-      const cards = grid.querySelectorAll('.masonry-item');
-      const searchInput = document.getElementById('searchInput');
-      const filterItems = document.querySelectorAll('.dropdown-item[data-filter]');
-      const sortItems = document.querySelectorAll('.dropdown-item[data-sort]');
+    document.addEventListener("DOMContentLoaded", () => {
+      const grid = document.getElementById("capstoneGrid");
+      const cards = grid.querySelectorAll(".masonry-item");
+      const searchInput = document.getElementById("searchInput");
+      const filterItems = document.querySelectorAll(
+        ".dropdown-item[data-filter]",
+      );
+      const sortItems = document.querySelectorAll(".dropdown-item[data-sort]");
 
       // Dropdown Toggle Functionality
-      const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
-      
-      dropdownToggles.forEach(toggle => {
-        toggle.addEventListener('click', (e) => {
+      const dropdownToggles = document.querySelectorAll(".dropdown-toggle");
+
+      dropdownToggles.forEach((toggle) => {
+        toggle.addEventListener("click", (e) => {
           e.preventDefault();
           e.stopPropagation();
-          const dropdown = toggle.closest('.dropdown');
-          const menu = dropdown.querySelector('.dropdown-menu');
-          
+          const dropdown = toggle.closest(".dropdown");
+          const menu = dropdown.querySelector(".dropdown-menu");
+
           // Close all other dropdowns first
-          document.querySelectorAll('.dropdown-menu').forEach(m => {
-            if (m !== menu) m.classList.remove('show');
+          document.querySelectorAll(".dropdown-menu").forEach((m) => {
+            if (m !== menu) m.classList.remove("show");
           });
-          
+
           // Toggle current dropdown
-          menu.classList.toggle('show');
+          menu.classList.toggle("show");
         });
       });
 
       // Close dropdowns when clicking outside
-      document.addEventListener('click', () => {
-        document.querySelectorAll('.dropdown-menu').forEach(menu => {
-          menu.classList.remove('show');
+      document.addEventListener("click", () => {
+        document.querySelectorAll(".dropdown-menu").forEach((menu) => {
+          menu.classList.remove("show");
         });
       });
 
       // Filter Function
       function filterCards(category) {
-        cards.forEach(card => {
-          const cardCategory = card.getAttribute('data-category');
-          if (category === 'All' || cardCategory === category) {
-            card.style.display = 'block';
+        cards.forEach((card) => {
+          const cardCategory = card.getAttribute("data-category");
+          if (category === "All" || cardCategory === category) {
+            card.style.display = "block";
           } else {
-            card.style.display = 'none';
+            card.style.display = "none";
           }
         });
       }
@@ -105,13 +135,15 @@ const courses = [...new Set(capstones.map(c => c.course))];
       // Search Function
       function searchCards(query) {
         const lowerQuery = query.toLowerCase();
-        cards.forEach(card => {
-          const title = card.querySelector('h3').textContent.toLowerCase();
-          const author = card.querySelector('.author').textContent.toLowerCase();
+        cards.forEach((card) => {
+          const title = card.querySelector("h3").textContent.toLowerCase();
+          const author = card
+            .querySelector(".author")
+            .textContent.toLowerCase();
           if (title.includes(lowerQuery) || author.includes(lowerQuery)) {
-            card.style.display = 'block';
+            card.style.display = "block";
           } else {
-            card.style.display = 'none';
+            card.style.display = "none";
           }
         });
       }
@@ -119,66 +151,66 @@ const courses = [...new Set(capstones.map(c => c.course))];
       // Sort Function
       function sortCards(criteria) {
         const cardsArray = Array.from(cards);
-        
+
         // We need to sort ALL cards, not just visible ones, to maintain state correctly
         // But for simplicity, let's just sort the visible ones and re-append them
-        
+
         switch (criteria) {
-          case 'Latest':
+          case "Latest":
             cardsArray.sort((a, b) => {
-              const yearA = parseInt(a.querySelector('.year').textContent);
-              const yearB = parseInt(b.querySelector('.year').textContent);
+              const yearA = parseInt(a.querySelector(".year").textContent);
+              const yearB = parseInt(b.querySelector(".year").textContent);
               return yearB - yearA;
             });
             break;
-          case 'Highest Rated':
+          case "Highest Rated":
             // Simulate rating by sorting by title descending (A-Z reversed)
             cardsArray.sort((a, b) => {
-              const titleA = a.querySelector('h3').textContent;
-              const titleB = b.querySelector('h3').textContent;
+              const titleA = a.querySelector("h3").textContent;
+              const titleB = b.querySelector("h3").textContent;
               return titleB.localeCompare(titleA);
             });
             break;
-          case 'Most Viewed':
+          case "Most Viewed":
             // Random shuffle for simulation
             cardsArray.sort(() => Math.random() - 0.5);
             break;
-          case 'Relevance':
+          case "Relevance":
           default:
             // Default order - do nothing or reset to original
             // In a real app, we'd store original indices
             break;
         }
-        
+
         // Re-append sorted cards
-        cardsArray.forEach(card => grid.appendChild(card));
+        cardsArray.forEach((card) => grid.appendChild(card));
       }
 
       // Event Listeners for filter and sort items
-      filterItems.forEach(item => {
-        item.addEventListener('click', (e) => {
+      filterItems.forEach((item) => {
+        item.addEventListener("click", (e) => {
           e.preventDefault();
           e.stopPropagation();
-          filterCards(e.target.getAttribute('data-filter'));
+          filterCards(e.target.getAttribute("data-filter"));
           // Close dropdown after selection
-          document.querySelectorAll('.dropdown-menu').forEach(menu => {
-            menu.classList.remove('show');
+          document.querySelectorAll(".dropdown-menu").forEach((menu) => {
+            menu.classList.remove("show");
           });
         });
       });
 
-      searchInput.addEventListener('input', (e) => {
+      searchInput.addEventListener("input", (e) => {
         searchCards(e.target.value);
       });
 
-      sortItems.forEach(item => {
-        item.addEventListener('click', (e) => {
+      sortItems.forEach((item) => {
+        item.addEventListener("click", (e) => {
           e.preventDefault();
           e.stopPropagation();
-          sortCards(e.target.getAttribute('data-sort'));
+          sortCards(e.target.getAttribute("data-sort"));
           // Close dropdown after selection
-          document.querySelectorAll('.dropdown-menu').forEach(menu => {
-            menu.classList.remove('show');
+          document.querySelectorAll(".dropdown-menu").forEach((menu) => {
+            menu.classList.remove("show");
           });
         });
       });

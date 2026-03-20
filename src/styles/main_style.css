@@ -28,16 +28,14 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-}
-
-.banner h1 {
-    font-size: var(--font-size-8);
-    font-family: "Lorcan Mist";
-    line-height: 1.1;
-}
-
-.banner p {
-    font-size: var(--font-size-3);
+    h1 {
+        font-size: var(--font-size-fluid-3);
+        font-family: "Lorcan Mist";
+        line-height: 1.1;
+    }
+    p {
+        font-size: var(--font-size-fluid-1);
+    }
 }
 
 /* Masonry Layout */
@@ -61,18 +59,29 @@ body {
     }
 }
 
-.search-bar {
+/* Unified Search Bar Container */
+.search-bar-container {
     display: flex;
-    min-width: var(--size-fluid-10);
+    width: calc(var(--size-fluid-10) * 1.5);
+    gap: var(--size-2);
+    align-items: center;
     background-color: var(--white-bg-color);
     border-radius: var(--radius-2);
+}
+
+/* Search bar */
+.search-bar {
+    display: flex;
+    flex: 1;
+    min-width: 0;
     align-items: center;
     padding: var(--size-1) var(--size-3);
     gap: var(--size-1);
 }
 
 .search-bar input[type="text"] {
-    width: 100%;
+    flex: 1;
+    min-width: 0;
     padding: var(--size-2);
     border: none;
     border-radius: 0;
@@ -104,12 +113,12 @@ body {
     border-color: var(--gray-4);
 }
 
-/* Filter/Sort bar (right-aligned row below search) */
+/* Filter/Sort bar */
 .filter-sort-bar {
+    padding: var(--size-2) var(--size-2);
     display: flex;
-    justify-content: flex-end;
     gap: var(--size-1);
-    margin-top: var(--size-3);
+    flex-shrink: 0;
 }
 
 /* Dropdown menu alignment - always align to the left */
@@ -131,26 +140,25 @@ body {
 
 /* Mobile responsive styles */
 @media (max-width: 576px) {
-    /* Search bar full width, wrap on mobile */
-    .search-bar {
+    /* Container stacks vertically */
+    .search-bar-container {
+        flex-direction: column;
+        gap: 0;
         width: calc(100% - var(--size-3));
-        padding: var(--size-1);
     }
 
-    .search-bar input[type="text"] {
+    /* Search bar full width */
+    .search-bar-container .search-bar {
         width: 100%;
-        min-width: 0;
     }
 
-    /* Filter/Sort bar adapts for mobile */
+    /* Filter and Sort equal width */
     .filter-sort-bar {
-        flex-wrap: wrap;
-        justify-content: flex-end;
-        width: calc(100% - var(--size-3));
+        width: 100%;
     }
 
     .filter-sort-bar .dropdown {
-        width: 48%;
+        flex: 1;
     }
 
     .filter-sort-bar .dropdown-toggle {
