@@ -12,7 +12,9 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^6.0.5",
-    "open-props": "^1.7.23"
+    "@astrojs/netlify": "^7.0.3",
+    "astro": "^6.0.7",
+    "open-props": "^1.7.23",
+    "tslib": "^2.8.1"
   }
 }
