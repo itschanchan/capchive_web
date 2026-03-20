@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Racing+Sans+One&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
-
 @import "./reset.css";
 @import "./variables.css";
 
@@ -42,16 +41,10 @@ body {
 /* Masonry Layout */
 .masonry-grid {
     column-count: 3;
-    column-gap: var(--size-3);
-    padding: var(--size-7);
+    column-gap: var(--size-5);
+    padding: var(--size-5);
     max-width: 1200px;
     margin: 0 auto;
-}
-
-/* Ensure masonry items fill column width and maintain aspect ratio */
-.masonry-grid .masonry-item {
-    width: 100%;
-    display: block;
 }
 
 @media (max-width: 992px) {
@@ -63,7 +56,6 @@ body {
 @media (max-width: 576px) {
     .masonry-grid {
         column-count: 1;
-        padding: var(--size-3);
     }
 }
 
@@ -75,8 +67,6 @@ body {
     align-items: center;
     background-color: var(--white-bg-color);
     border-radius: var(--radius-2);
-    position: relative;
-    z-index: 1;
 }
 
 /* Search bar */
@@ -130,8 +120,6 @@ body {
     gap: var(--size-1);
     flex-shrink: 0;
     align-items: center;
-    position: relative;
-    z-index: var(--z-index-3);
 }
 
 /* Sort Controls Container */
@@ -141,18 +129,19 @@ body {
     gap: var(--size-1);
 }
 
-/* Sort Direction Toggle Button */
+/* Sort Direction Buttons */
 .sort-direction {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    gap: 2px;
 }
 
 .direction-btn {
-    padding: var(--size-1);
+    padding: var(--size-half);
     border: 1px solid var(--gray-3);
     background: transparent;
     cursor: pointer;
-    border-radius: var(--radius-2);
+    border-radius: var(--radius-1);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -160,7 +149,7 @@ body {
 }
 
 .direction-btn .material-symbols-outlined {
-    font-size: var(--font-size-2);
+    font-size: var(--font-size-1);
     color: var(--gray-6);
 }
 
@@ -178,13 +167,8 @@ body {
     color: var(--header-bg-color);
 }
 
-.direction-btn.active .material-symbols-outlined {
-    color: var(--header-bg-color);
-}
-
 /* Dropdown menu alignment - always align to the left */
 .dropdown-menu {
-    z-index: 1;
     top: calc(100% + var(--size-1));
     left: 0;
     right: auto;
@@ -201,41 +185,3 @@ body {
 }
 
 /* Mobile responsive styles */
-@media (max-width: 576px) {
-    /* Container stacks vertically */
-    .search-bar-container {
-        flex-direction: column;
-        width: calc(100% - var(--size-3));
-    }
-
-    /* Search bar full width */
-    .search-bar-container .search-bar {
-        width: 100%;
-    }
-
-    /* Filter and Sort equal width */
-    .filter-sort-bar {
-        width: 100%;
-    }
-
-    .filter-sort-bar .dropdown {
-        flex: 1;
-    }
-
-    .filter-sort-bar .dropdown-toggle {
-        width: 100%;
-        justify-content: center;
-    }
-
-    .direction-btn {
-        width: 100%;
-        padding: var(--size-1);
-    }
-
-    /* Banner adjustments for mobile */
-    .banner {
-        height: auto;
-        min-height: var(--size-fluid-3);
-        padding: var(--size-7) var(--size-3);
-    }
-}

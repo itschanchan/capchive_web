@@ -1,23 +1,23 @@
 [
   {
     "id": "project-alpha",
-    "image": "/ciit-logo.png",
+    "image": "/capstone_imgs/01.png",
     "title": "Project Alpha",
-    "authors": "John Doe",
-    "year": "2023",
-    "course": "Computer Science",
-    "description": "Project Alpha is a comprehensive software solution designed to streamline workflow processes.",
+    "authors": "Kylene Alexa C.",
+    "year": "2025",
+    "course": "Multimedia Arts",
+    "description": "Aenean sodales mauris ipsum, malesuada egestas risus egestas id. Aliquam luctus rhoncus tortor eu pharetra. Ut elementum arcu neque. Nullam aliquam sodales risus in commodo. Sed diam augue, pellentesque vitae porta ac, hendrerit quis augue. Nullam pharetra molestie massa eget cursus. Nam porttitor tellus id tempor sagittis.",
     "documentation": "/docs/project-alpha.pdf",
     "images": ["/ciit-logo.png"]
   },
   {
     "id": "creative-vision",
-    "image": "/ciit-logo.png",
+    "image": "/capstone_imgs/02.png",
     "title": "Creative Vision",
-    "authors": "Jane Smith",
-    "year": "2022",
+    "authors": "Kylene Alexa C.",
+    "year": "2025",
     "course": "Multimedia Arts",
-    "description": "A multimedia project exploring visual storytelling through digital art.",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vitae mauris nulla. Nullam et ex dignissim, accumsan lorem non, elementum libero. Aliquam ut orci lacus. Donec convallis odio eu mollis aliquet. Cras sodales varius ipsum, non cursus dolor imperdiet et. Mauris lorem augue, venenatis sed elit eget, dapibus consequat diam. Nullam magna felis, vestibulum quis tortor pretium, convallis sodales nisi. Sed at pulvinar orci, eu dictum tortor. Curabitur sit amet dolor luctus, pulvinar eros et, varius mauris. Pellentesque sodales diam at elementum tincidunt. Sed dictum consectetur nibh, a auctor dui luctus quis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vestibulum ornare, ipsum in vestibulum gravida, neque metus faucibus ipsum, quis vulputate tellus lorem sed sapien. In non nibh ac tortor congue accumsan eget eu dolor.",
     "documentation": "/docs/creative-vision.pdf",
     "images": ["/ciit-logo.png"]
   },

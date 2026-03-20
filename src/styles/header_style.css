@@ -1,11 +1,11 @@
 :root {
-    --header-logo-height: 52px;
+    --header-logo-height: 48px;
 }
 
 .main-header {
     min-height: var(--size-9);
     background-color: var(--header-bg-color);
-    padding: 0 var(--size-3) 0 var(--size-1);
+    padding: 0 calc(var(--size-2) + var(--size-1)) 0 var(--size-1);
     color: var(--gray-0);
     display: flex;
     justify-content: space-between;
@@ -82,7 +82,7 @@
     text-decoration: none;
     font-size: var(--font-size-1);
     transition: color var(--ease-3);
-    border-radius: var(--radius-3);
+    border-radius: var(--size-2);
 }
 
 .header-nav a:not(.btn-about):hover {
@@ -134,7 +134,6 @@
     background-color: var(--button-bg-color);
     color: var(--header-bg-color);
     padding: var(--size-2) var(--size-3);
-    border-radius: var(--radius-2);
     border: none;
     margin-top: var(--size-2);
     text-align: center;

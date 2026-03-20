@@ -47,31 +47,41 @@ const courses = [...new Set(capstones.map((c) => c.course))];
           </ul>
         </div>
 
-        <!-- Sort Dropdown -->
-        <div class="dropdown">
-          <button class="dropdown-toggle" type="button">
-            Sort <span class="material-symbols-outlined">sort</span>
-          </button>
-          <ul class="dropdown-menu">
-            <li>
-              <a class="dropdown-item" href="#" data-sort="Relevance"
-                >Relevance</a
-              >
-            </li>
-            <li>
-              <a class="dropdown-item" href="#" data-sort="Latest">Latest</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#" data-sort="Most Viewed"
-                >Most Viewed</a
-              >
-            </li>
-            <li>
-              <a class="dropdown-item" href="#" data-sort="Highest Rated"
-                >Highest Rated</a
-              >
-            </li>
-          </ul>
+        <!-- Sort Controls -->
+        <div class="sort-controls">
+          <!-- Sort Dropdown -->
+          <div class="dropdown">
+            <button class="dropdown-toggle" type="button">
+              Sort <span class="material-symbols-outlined">sort</span>
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" href="#" data-sort="Relevance"
+                  >Relevance</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="#" data-sort="Year">Year</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#" data-sort="Most Viewed"
+                  >Most Viewed</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="#" data-sort="Highest Rated"
+                  >Highest Rated</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Direction Toggle Button -->
+          <div class="sort-direction">
+            <button class="direction-btn active" data-direction="desc" title="Descending (newest first)">
+              <span class="material-symbols-outlined">arrow_downward</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -92,6 +102,11 @@ const courses = [...new Set(capstones.map((c) => c.course))];
         ".dropdown-item[data-filter]",
       );
       const sortItems = document.querySelectorAll(".dropdown-item[data-sort]");
+      const directionBtns = document.querySelectorAll(".direction-btn");
+
+      // Track current sort state
+      let currentSort = "Year";
+      let sortDirection = "desc";
 
       // Dropdown Toggle Functionality
       const dropdownToggles = document.querySelectorAll(".dropdown-toggle");
@@ -149,18 +164,19 @@ const courses = [...new Set(capstones.map((c) => c.course))];
       }
 
       // Sort Function
-      function sortCards(criteria) {
+      function sortCards(criteria, direction = "desc") {
         const cardsArray = Array.from(cards);
 
         // We need to sort ALL cards, not just visible ones, to maintain state correctly
         // But for simplicity, let's just sort the visible ones and re-append them
 
         switch (criteria) {
-          case "Latest":
+          case "Year":
             cardsArray.sort((a, b) => {
               const yearA = parseInt(a.querySelector(".year").textContent);
               const yearB = parseInt(b.querySelector(".year").textContent);
-              return yearB - yearA;
+              // Direction-aware sorting
+              return direction === "desc" ? yearB - yearA : yearA - yearB;
             });
             break;
           case "Highest Rated":
@@ -168,11 +184,14 @@ const courses = [...new Set(capstones.map((c) => c.course))];
             cardsArray.sort((a, b) => {
               const titleA = a.querySelector("h3").textContent;
               const titleB = b.querySelector("h3").textContent;
-              return titleB.localeCompare(titleA);
+              // Direction-aware sorting
+              return direction === "desc" 
+                ? titleB.localeCompare(titleA) 
+                : titleA.localeCompare(titleB);
             });
             break;
           case "Most Viewed":
-            // Random shuffle for simulation
+            // Random shuffle for simulation (direction doesn't apply here)
             cardsArray.sort(() => Math.random() - 0.5);
             break;
           case "Relevance":
@@ -203,17 +222,47 @@ const courses = [...new Set(capstones.map((c) => c.course))];
         searchCards(e.target.value);
       });
 
+      // Sort item click handler
       sortItems.forEach((item) => {
         item.addEventListener("click", (e) => {
           e.preventDefault();
           e.stopPropagation();
-          sortCards(e.target.getAttribute("data-sort"));
+          currentSort = e.target.getAttribute("data-sort");
+          sortCards(currentSort, sortDirection);
           // Close dropdown after selection
           document.querySelectorAll(".dropdown-menu").forEach((menu) => {
             menu.classList.remove("show");
           });
         });
       });
+
+      // Direction button click handler - TOGGLE between asc/desc
+      directionBtns.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          // Toggle direction
+          sortDirection = sortDirection === "desc" ? "asc" : "desc";
+          
+          // Update button icon
+          const icon = btn.querySelector(".material-symbols-outlined");
+          icon.textContent = sortDirection === "desc" 
+            ? "arrow_downward" 
+            : "arrow_upward";
+          
+          // Update title
+          btn.title = sortDirection === "desc" 
+            ? "Descending (newest first)" 
+            : "Ascending (oldest first)";
+          
+          // Update data attribute
+          btn.dataset.direction = sortDirection;
+          
+          // Re-sort with new direction
+          sortCards(currentSort, sortDirection);
+        });
+      });
+
+      // Apply default sort on page load
+      sortCards(currentSort, sortDirection);
     });
   </script>
 </Layout>

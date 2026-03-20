@@ -1,22 +1,22 @@
 ---
 import Header from "../components/Header.astro";
+import "../styles/main_style.css";
+import "../styles/nav_style.css";
 ---
 
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width" />
-        <link rel="icon" href="/ciit_favicon.png" />
-        <meta name="generator" content={Astro.generator} />
-        <title>CapChive</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" href="/ciit_favicon.png" />
+    <meta name="generator" content={Astro.generator} />
+    <title>CapChive</title>
 
-        <!-- Global Styles -->
-        <link rel="stylesheet" href="https://unpkg.com/open-props">
-        <link rel="stylesheet" href="/src/styles/main_style.css" />
-        <link rel="stylesheet" href="/src/styles/nav_style.css" />
-    </head>
-    <body>
+    <!-- Global Styles -->
+    <link rel="stylesheet" href="https://unpkg.com/open-props" />
+  </head>
+  <body>
     <Header />
     <slot />
   </body>

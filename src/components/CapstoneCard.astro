@@ -2,14 +2,20 @@
 const { capstone } = Astro.props;
 ---
 
-<a href={`/capstone/${capstone.id}`} class="masonry-item" data-category={capstone.course}>
-  <div class="card-content">
-    <div class="card-image">
-      <img src={capstone.image} alt={capstone.title} />
-    </div>
-    <div class="card-details">
-      <h3>{capstone.title}</h3>
-      <p class="author">{capstone.authors}</p>
+<a
+  href={`/capstone/${capstone.id}`}
+  class="masonry-item"
+  data-category={capstone.course}
+>
+  <div class="card-image">
+    <img src={capstone.image} alt={capstone.title} />
+
+    <div class="card-content">
+      <div class="card-details">
+        <h3>{capstone.title}</h3>
+        <p class="author">{capstone.authors}</p>
+      </div>
+
       <div class="tags">
         <span class="tag year">{capstone.year}</span>
         <span class="tag course">{capstone.course}</span>
@@ -20,78 +26,114 @@ const { capstone } = Astro.props;
 
 <style>
   .masonry-item {
-    display: block;
-    background: var(--gray-0);
+    z-index: 0;
     border-radius: var(--radius-3);
     overflow: hidden;
     box-shadow: var(--shadow-1);
-    transition: transform var(--ease-3), box-shadow var(--ease-3);
+    transition:
+      transform var(--ease-3),
+      box-shadow var(--ease-3);
     text-decoration: none;
     color: inherit;
-    margin-bottom: var(--size-3);
     break-inside: avoid;
+    position: relative;
+    margin-bottom: var(--size-3);
   }
 
   .masonry-item:hover {
-    transform: translateY(var(--size-1));
-    box-shadow: var(--shadow-2);
-  }
-
-  .card-content {
-    padding: var(--size-3);
+    /*transform: translateY(var(--size-1));*/
+    /*box-shadow: var(--shadow-2);*/
   }
 
   .card-image {
+    position: relative;
     width: 100%;
-    height: var(--size-fluid-2);
-    min-height: var(--size-fluid-1);
-    overflow: hidden;
-    border-radius: var(--radius-1);
-    margin-bottom: var(--size-3);
-    background: var(--gray-1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 
   .card-image img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: saturate(0.8) brightness(0.8);
+    transition:
+      filter 0.4s ease,
+      transform 0.4s ease;
+    will-change: filter;
+  }
+
+  .masonry-item:hover .card-image img {
+    filter: saturate(1) brightness(1);
+  }
+
+  .card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(0, 0, 0, 0.25) 15%,
+      rgba(0, 0, 0, 0.55) 100%
+    );
+    pointer-events: none;
+  }
+
+  .card-content {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: var(--size-3);
+
+    /* Gradient background for readability */
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.85) 0%,
+      rgba(0, 0, 0, 0.6) 40%,
+      rgba(0, 0, 0, 0.2) 70%,
+      transparent 100%
+    );
   }
 
   .card-details h3 {
-    margin: 0 0 var(--size-1) 0;
     font-size: var(--font-size-2);
-    color: var(--gray-8);
+    color: var(--gray-0);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+    margin: 0 0 var(--size-1);
   }
 
   .author {
-    color: var(--gray-5);
-    margin-bottom: var(--size-1);
-    font-size: var(--font-size-0);
+    color: rgba(255, 255, 255, 0.9);
+    font-size: var(--font-size-1);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    margin: 0;
   }
 
   .tags {
     display: flex;
     gap: var(--size-1);
     flex-wrap: wrap;
+    margin-top: var(--size-2);
   }
 
   .tag {
-    padding: var(--size-half) var(--size-2);
+    padding: var(--size-1) var(--size-2);
     border-radius: var(--radius-4);
-    font-size: var(--font-size-00);
+    font-size: var(--font-size-0);
     font-weight: var(--font-weight-6);
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--gray-8);
   }
 
   .year {
-    background-color: var(--button-hover-bg-color, var(--gray-3));
-    color: var(--header-bg-color, var(--gray-8));
+    background-color: var(--button-bg-color);
+    color: var(--header-bg-color);
   }
 
-  .course {
-    background-color: var(--nav-btn-bg-color, var(--gray-2));
-    color: var(--header-bg-color, var(--gray-8));
+  @media (max-width: 576px) {
+    .card-details h3 {
+      font-size: var(--font-size-1);
+    }
+
+    .author {
+      font-size: var(--font-size-00);
+    }
   }
 </style>
