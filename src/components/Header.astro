@@ -3,49 +3,52 @@ import "../styles/header_style.css";
 import "../styles/icon_style.css";
 ---
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+/>
 
 <header class="main-header">
   <img src="/ciit-logo.png" alt="CIIT Logo" class="header-logo">
-  
+
   <div class="header-right">
-    <!-- Desktop Navigation -->
     <nav class="header-nav desktop-nav">
       <a href="/submit">How to Submit</a>
       <a href="https://www.ciit.edu.ph/contact-us/" target="_blank" rel="noopener noreferrer">Contact Us</a>
-      <a href="https://www.ciit.edu.ph/about/" target="_blank" rel="noopener noreferrer" class="btn-about">About CIIT <span class="material-symbols-outlined">open_in_new</span></a>
+      <a href="https://www.ciit.edu.ph/about/" target="_blank" rel="noopener noreferrer" class="btn-about">
+        About CIIT
+        <span class="material-symbols-outlined">open_in_new</span>
+      </a>
     </nav>
-    
-    <!-- Hamburger Button (mobile only) -->
+
     <button class="hamburger-menu" aria-label="Toggle menu">
       <span class="material-symbols-outlined">menu</span>
     </button>
   </div>
-  
-  <!-- Mobile Navigation Dropdown -->
+
   <nav class="header-nav mobile-nav">
     <a href="/submit">How to Submit</a>
-    <a href="https://www.ciit.edu.ph/contact-us/" target="_blank" rel="noopener noreferrer">Contact Us</a>
-    <a href="https://www.ciit.edu.ph/about/" target="_blank" rel="noopener noreferrer" class="btn-about">About CIIT <span class="material-symbols-outlined">open_in_new</span></a>
+    <a href="https://www.ciit.edu.ph/contact-us/" target="_blank">Contact Us</a>
+    <a href="https://www.ciit.edu.ph/about/" target="_blank" class="btn-about">
+      About CIIT <span class="material-symbols-outlined">open_in_new</span>
+    </a>
   </nav>
 </header>
 
-  <script>
+<script>
   document.addEventListener('DOMContentLoaded', () => {
     const hamburger = document.querySelector('.hamburger-menu');
     const mobileNav = document.querySelector('.mobile-nav');
-    
-    if (hamburger && mobileNav) {
-      hamburger.addEventListener('click', (e) => {
-        e.preventDefault();
-        mobileNav.classList.toggle('is-open');
-      });
-      
-      document.addEventListener('click', (e) => {
-        if (!hamburger.contains(e.target) && !mobileNav.contains(e.target)) {
-          mobileNav.classList.remove('is-open');
-        }
-      });
-    }
+
+    hamburger?.addEventListener('click', (e) => {
+      e.preventDefault();
+      mobileNav.classList.toggle('is-open');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!hamburger.contains(e.target) && !mobileNav.contains(e.target)) {
+        mobileNav.classList.remove('is-open');
+      }
+    });
   });
 </script>
